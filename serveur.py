@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    global temp # imitation du systeme de logs
+    global temp
     if temp:
         temp = False
         return redirect(url_for('main_jour'))
@@ -57,4 +57,5 @@ def IA_nuit():
 def err():
     return render_template('err.html')
 
-app.run(host='localhost',port=80)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80, debug=False)
