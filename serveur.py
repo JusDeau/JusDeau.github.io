@@ -1,17 +1,11 @@
-from flask import Flask,render_template,redirect,url_for
-
-temp = True
+from flask import Flask, render_template, redirect, url_for
+import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
-    global temp
-    if temp:
-        temp = False
-        return redirect(url_for('main_jour'))
-    else:
-        return redirect(url_for('err'))
+    return redirect(url_for('main_jour'))
 
 @app.route('/main_jour')
 def main_jour():
@@ -58,4 +52,5 @@ def err():
     return render_template('err.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=False)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port,debug=True)
